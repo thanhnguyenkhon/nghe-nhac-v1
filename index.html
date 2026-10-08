@@ -1,0 +1,3435 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#09090b">
+<title>NhacBox</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+html,body{
+    background:#09090b;
+    color:#fff;
+    min-height:100%;
+}
+
+body{
+    padding-bottom:115px;
+}
+
+button,input,textarea{
+    font:inherit;
+}
+
+button{
+    border:0;
+    cursor:pointer;
+}
+
+.hidden{
+    display:none!important;
+}
+
+/* ================= AUTH ================= */
+
+#authPage{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    background:
+        radial-gradient(circle at top,#292929 0,#111 35%,#070707 75%);
+}
+
+.auth-card{
+    width:100%;
+    max-width:410px;
+    background:#151518;
+    border:1px solid #29292d;
+    border-radius:25px;
+    padding:30px;
+    box-shadow:0 25px 80px rgba(0,0,0,.6);
+}
+
+.logo{
+    text-align:center;
+    font-size:35px;
+    font-weight:800;
+    margin-bottom:8px;
+}
+
+.logo-sub{
+    text-align:center;
+    color:#888;
+    margin-bottom:28px;
+}
+
+.auth-card input{
+    width:100%;
+    padding:14px;
+    margin-bottom:12px;
+    border:1px solid #333;
+    border-radius:12px;
+    background:#0d0d0f;
+    color:#fff;
+    outline:none;
+}
+
+.auth-card input:focus{
+    border-color:#777;
+}
+
+.main-auth-btn{
+    width:100%;
+    padding:14px;
+    border-radius:12px;
+    background:#fff;
+    color:#111;
+    font-weight:700;
+}
+
+.auth-switch{
+    display:block;
+    width:100%;
+    margin-top:14px;
+    padding:10px;
+    background:none;
+    color:#aaa;
+}
+
+/* ================= HEADER ================= */
+
+#appPage{
+    min-height:100vh;
+}
+
+header{
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:rgba(9,9,11,.94);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid #242428;
+}
+
+.header-inner{
+    max-width:1100px;
+    margin:auto;
+    padding:15px 18px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+}
+
+.header-logo{
+    font-size:24px;
+    font-weight:800;
+}
+
+.user-info{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.user-email{
+    color:#888;
+    font-size:12px;
+    max-width:180px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+.logout-btn{
+    background:#29292e;
+    color:#fff;
+    border-radius:10px;
+    padding:9px 12px;
+}
+
+/* ================= MAIN ================= */
+
+main{
+    width:100%;
+    max-width:1100px;
+    margin:auto;
+    padding:18px;
+}
+
+.search{
+    width:100%;
+    background:#17171b;
+    border:1px solid #29292d;
+    color:#fff;
+    border-radius:15px;
+    padding:15px;
+    outline:none;
+    margin-bottom:16px;
+}
+
+.search:focus{
+    border-color:#666;
+}
+
+/* ================= TABS ================= */
+
+.tabs{
+    display:flex;
+    gap:8px;
+    overflow-x:auto;
+    padding-bottom:5px;
+    margin-bottom:22px;
+}
+
+.tabs button{
+    flex-shrink:0;
+    padding:11px 16px;
+    border-radius:12px;
+    background:#19191d;
+    color:#999;
+}
+
+.tabs button.active{
+    background:#fff;
+    color:#111;
+}
+
+/* ================= SECTIONS ================= */
+
+.section-title{
+    font-size:22px;
+    font-weight:700;
+    margin-bottom:15px;
+}
+
+.empty{
+    text-align:center;
+    padding:45px 15px;
+    color:#777;
+    background:#121215;
+    border-radius:18px;
+}
+
+/* ================= SONG ================= */
+
+.song-list{
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+}
+
+.song{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:10px;
+    background:#151518;
+    border:1px solid #202024;
+    border-radius:16px;
+    transition:.15s;
+}
+
+.song:hover{
+    background:#1d1d21;
+}
+
+.cover{
+    width:60px;
+    height:60px;
+    min-width:60px;
+    border-radius:11px;
+    object-fit:cover;
+    background:#29292d;
+}
+
+.song-info{
+    flex:1;
+    min-width:0;
+    cursor:pointer;
+}
+
+.song-title{
+    font-size:15px;
+    font-weight:700;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+.song-artist{
+    color:#888;
+    font-size:13px;
+    margin-top:5px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+.song-buttons{
+    display:flex;
+    gap:5px;
+}
+
+.small-btn{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    background:#29292e;
+    color:#fff;
+}
+
+.small-btn:hover{
+    background:#414147;
+}
+
+/* ================= UPLOAD ================= */
+
+.upload-card{
+    background:#151518;
+    border:1px solid #29292d;
+    border-radius:20px;
+    padding:20px;
+}
+
+.upload-area{
+    border:2px dashed #3a3a3f;
+    border-radius:17px;
+    padding:28px 15px;
+    text-align:center;
+    color:#999;
+}
+
+.upload-area strong{
+    display:block;
+    color:#fff;
+    font-size:18px;
+    margin-bottom:8px;
+}
+
+.file-label{
+    display:inline-block;
+    background:#fff;
+    color:#111;
+    padding:12px 18px;
+    border-radius:11px;
+    font-weight:700;
+    margin-top:15px;
+    cursor:pointer;
+}
+
+#musicInput{
+    display:none;
+}
+
+.meta{
+    margin-top:18px;
+}
+
+.meta input,
+.meta textarea{
+    width:100%;
+    background:#0d0d0f;
+    border:1px solid #303035;
+    color:#fff;
+    border-radius:11px;
+    padding:13px;
+    margin-top:9px;
+    outline:none;
+}
+
+.meta textarea{
+    min-height:120px;
+    resize:vertical;
+}
+
+.meta label{
+    display:block;
+    color:#aaa;
+    margin-top:13px;
+}
+
+.cover-picker{
+    margin-top:10px;
+}
+
+.cover-picker input{
+    padding:10px;
+}
+
+.add-btn{
+    width:100%;
+    padding:14px;
+    margin-top:17px;
+    background:#fff;
+    color:#111;
+    border-radius:12px;
+    font-weight:700;
+}
+
+.selected-files{
+    margin-top:15px;
+    color:#aaa;
+    font-size:14px;
+    line-height:1.6;
+}
+
+/* ================= PLAYLIST ================= */
+
+.playlist-create{
+    display:flex;
+    gap:8px;
+    margin-bottom:18px;
+}
+
+.playlist-create input{
+    flex:1;
+    background:#151518;
+    border:1px solid #303035;
+    color:#fff;
+    padding:13px;
+    border-radius:11px;
+    outline:none;
+}
+
+.playlist-create button{
+    padding:13px 16px;
+    border-radius:11px;
+    background:#fff;
+    color:#111;
+    font-weight:700;
+}
+
+.playlist-card{
+    background:#151518;
+    border:1px solid #252529;
+    border-radius:16px;
+    padding:15px;
+    margin-bottom:9px;
+}
+
+.playlist-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+}
+
+.playlist-name{
+    font-weight:700;
+}
+
+.playlist-count{
+    color:#888;
+    font-size:13px;
+    margin-top:4px;
+}
+
+.playlist-actions{
+    display:flex;
+    gap:5px;
+}
+
+/* ================= MODAL ================= */
+
+.modal{
+    position:fixed;
+    inset:0;
+    z-index:100;
+    background:rgba(0,0,0,.82);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:18px;
+}
+
+.modal-card{
+    width:100%;
+    max-width:520px;
+    max-height:90vh;
+    overflow:auto;
+    background:#17171b;
+    border:1px solid #303035;
+    border-radius:22px;
+    padding:20px;
+}
+
+.modal-top{
+    display:flex;
+    justify-content:flex-end;
+}
+
+.close-btn{
+    width:36px;
+    height:36px;
+    border-radius:50%;
+    background:#29292e;
+    color:#fff;
+}
+
+.detail-cover{
+    width:100%;
+    max-height:330px;
+    object-fit:cover;
+    border-radius:15px;
+    margin:5px 0 16px;
+}
+
+.detail-title{
+    font-size:24px;
+    font-weight:700;
+}
+
+.detail-artist{
+    color:#888;
+    margin-top:6px;
+    margin-bottom:20px;
+}
+
+.lyrics-title{
+    font-weight:700;
+    margin-bottom:9px;
+}
+
+.lyrics{
+    background:#0d0d0f;
+    border-radius:13px;
+    padding:15px;
+    color:#ddd;
+    line-height:1.7;
+    white-space:pre-wrap;
+}
+
+/* ================= PLAYER ================= */
+
+.player{
+    position:fixed;
+    left:0;
+    right:0;
+    bottom:0;
+    z-index:50;
+    background:rgba(16,16,19,.97);
+    backdrop-filter:blur(20px);
+    border-top:1px solid #29292d;
+    padding:9px 15px 10px;
+}
+
+.player-inner{
+    max-width:1100px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    gap:11px;
+}
+
+.player-cover{
+    width:52px;
+    height:52px;
+    min-width:52px;
+    border-radius:10px;
+    object-fit:cover;
+    background:#29292e;
+}
+
+.player-info{
+    flex:1;
+    min-width:0;
+}
+
+.player-title{
+    font-weight:700;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.player-artist{
+    color:#888;
+    font-size:12px;
+    margin-top:4px;
+}
+
+.player-controls{
+    display:flex;
+    align-items:center;
+    gap:6px;
+}
+
+.player-btn{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    background:#29292e;
+    color:#fff;
+}
+
+.play-btn{
+    width:44px;
+    height:44px;
+    background:#fff;
+    color:#111;
+}
+
+.mode-text{
+    color:#999;
+    font-size:11px;
+    min-width:45px;
+}
+
+.progress-wrap{
+    max-width:1100px;
+    margin:7px auto 0;
+}
+
+.progress{
+    width:100%;
+    height:4px;
+    accent-color:#fff;
+}
+
+/* ================= TOAST ================= */
+
+.toast{
+    position:fixed;
+    left:50%;
+    bottom:130px;
+    transform:translateX(-50%);
+    z-index:200;
+    background:#fff;
+    color:#111;
+    padding:12px 17px;
+    border-radius:12px;
+    font-size:14px;
+    box-shadow:0 10px 40px #000;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:650px){
+
+    main{
+        padding:14px;
+    }
+
+    .header-inner{
+        padding:13px 14px;
+    }
+
+    .header-logo{
+        font-size:21px;
+    }
+
+    .user-email{
+        display:none;
+    }
+
+    .song-buttons .details-btn{
+        display:none;
+    }
+
+    .playlist-create{
+        flex-direction:column;
+    }
+
+    .player{
+        padding-left:9px;
+        padding-right:9px;
+    }
+
+    .player-inner{
+        flex-wrap:wrap;
+    }
+
+    .player-info{
+        max-width:calc(100% - 75px);
+    }
+
+    .player-controls{
+        width:100%;
+        justify-content:center;
+    }
+
+    .mode-text{
+        display:none;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<!-- =====================================================
+     LOGIN / REGISTER
+===================================================== -->
+
+<div id="authPage">
+
+    <div class="auth-card">
+
+        <div class="logo">🎵 NhacBox</div>
+
+        <div class="logo-sub">
+            Nghe nhạc của bạn
+        </div>
+
+        <!-- LOGIN -->
+
+        <div id="loginBox">
+
+            <input
+                id="loginEmail"
+                type="email"
+                placeholder="Email"
+                autocomplete="username"
+            >
+
+            <input
+                id="loginPassword"
+                type="password"
+                placeholder="Mật khẩu"
+                autocomplete="current-password"
+            >
+
+            <button
+                class="main-auth-btn"
+                onclick="login()"
+            >
+                Đăng nhập
+            </button>
+
+            <button
+                class="auth-switch"
+                onclick="showRegister()"
+            >
+                Chưa có tài khoản? Đăng ký
+            </button>
+
+        </div>
+
+
+        <!-- REGISTER -->
+
+        <div id="registerBox" class="hidden">
+
+            <input
+                id="registerEmail"
+                type="email"
+                placeholder="Email"
+                autocomplete="username"
+            >
+
+            <input
+                id="registerPassword"
+                type="password"
+                placeholder="Mật khẩu"
+                autocomplete="new-password"
+            >
+
+            <input
+                id="registerPassword2"
+                type="password"
+                placeholder="Nhập lại mật khẩu"
+                autocomplete="new-password"
+            >
+
+            <button
+                class="main-auth-btn"
+                onclick="register()"
+            >
+                Tạo tài khoản
+            </button>
+
+            <button
+                class="auth-switch"
+                onclick="showLogin()"
+            >
+                Đã có tài khoản? Đăng nhập
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     APP
+===================================================== -->
+
+<div id="appPage" class="hidden">
+
+<header>
+
+    <div class="header-inner">
+
+        <div class="header-logo">
+            🎵 NhacBox
+        </div>
+
+        <div class="user-info">
+
+            <div
+                id="userEmail"
+                class="user-email"
+            ></div>
+
+            <button
+                class="logout-btn"
+                onclick="logout()"
+            >
+                Đăng xuất
+            </button>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<main>
+
+    <!-- SEARCH -->
+
+    <input
+        id="searchInput"
+        class="search"
+        type="search"
+        placeholder="🔎 Tìm bài hát hoặc ca sĩ..."
+        oninput="renderLibrary()"
+    >
+
+
+    <!-- TABS -->
+
+    <div class="tabs">
+
+        <button
+            id="tabLibrary"
+            class="active"
+            onclick="openTab('library')"
+        >
+            🏠 Thư viện
+        </button>
+
+        <button
+            id="tabAdd"
+            onclick="openTab('add')"
+        >
+            ➕ Thêm nhạc
+        </button>
+
+        <button
+            id="tabPlaylist"
+            onclick="openTab('playlist')"
+        >
+            📂 Playlist
+        </button>
+
+        <button
+            id="tabOffline"
+            onclick="openTab('offline')"
+        >
+            📥 Offline
+        </button>
+
+    </div>
+
+
+    <!-- =================================================
+         LIBRARY
+    ================================================== -->
+
+    <section
+        id="librarySection"
+    >
+
+        <div class="section-title">
+            🎵 Thư viện nhạc
+        </div>
+
+        <div
+            id="libraryList"
+            class="song-list"
+        ></div>
+
+    </section>
+
+
+    <!-- =================================================
+         ADD MUSIC
+    ================================================== -->
+
+    <section
+        id="addSection"
+        class="hidden"
+    >
+
+        <div class="section-title">
+            ➕ Thêm nhiều bài hát
+        </div>
+
+        <div class="upload-card">
+
+            <div class="upload-area">
+
+                <strong>
+                    Thêm nhạc vào thiết bị
+                </strong>
+
+                <span>
+                    Có thể chọn nhiều bài cùng lúc
+                </span>
+
+                <br>
+
+                <label class="file-label">
+
+                    🎵 Chọn file nhạc
+
+                    <input
+                        id="musicInput"
+                        type="file"
+                        accept="audio/*"
+                        multiple
+                    >
+
+                </label>
+
+                <div
+                    id="selectedFiles"
+                    class="selected-files"
+                >
+                    Chưa chọn bài hát
+                </div>
+
+            </div>
+
+
+            <div class="meta">
+
+                <label>
+                    Nghệ sĩ / ca sĩ
+                </label>
+
+                <input
+                    id="artistInput"
+                    placeholder="Ví dụ: Sơn Tùng M-TP"
+                >
+
+
+                <label>
+                    Playlist
+                </label>
+
+                <input
+                    id="playlistInput"
+                    placeholder="Ví dụ: Nhạc yêu thích"
+                >
+
+
+                <label>
+                    Lời bài hát
+                </label>
+
+                <textarea
+                    id="lyricsInput"
+                    placeholder="Nhập lời bài hát..."
+                ></textarea>
+
+
+                <label>
+                    Ảnh minh họa chung cho các bài đã chọn
+                </label>
+
+                <input
+                    id="coverInput"
+                    type="file"
+                    accept="image/*"
+                >
+
+
+                <button
+                    class="add-btn"
+                    onclick="addSelectedSongs()"
+                >
+                    🎵 Thêm vào thư viện
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         PLAYLIST
+    ================================================== -->
+
+    <section
+        id="playlistSection"
+        class="hidden"
+    >
+
+        <div class="section-title">
+            📂 Playlist
+        </div>
+
+
+        <div class="playlist-create">
+
+            <input
+                id="newPlaylistName"
+                placeholder="Tên playlist..."
+            >
+
+            <button onclick="createPlaylist()">
+                Tạo
+            </button>
+
+        </div>
+
+
+        <div id="playlistList"></div>
+
+    </section>
+
+
+    <!-- =================================================
+         OFFLINE
+    ================================================== -->
+
+    <section
+        id="offlineSection"
+        class="hidden"
+    >
+
+        <div class="section-title">
+            📥 Đã tải offline
+        </div>
+
+        <div
+            id="offlineList"
+            class="song-list"
+        ></div>
+
+    </section>
+
+</main>
+
+
+<!-- =====================================================
+     PLAYER
+===================================================== -->
+
+<div class="player">
+
+    <div class="player-inner">
+
+        <img
+            id="playerCover"
+            class="player-cover"
+            alt=""
+        >
+
+        <div class="player-info">
+
+            <div
+                id="playerTitle"
+                class="player-title"
+            >
+                Chưa phát bài nào
+            </div>
+
+            <div
+                id="playerArtist"
+                class="player-artist"
+            >
+                NhacBox
+            </div>
+
+        </div>
+
+
+        <div class="player-controls">
+
+            <button
+                class="player-btn"
+                onclick="previousSong()"
+                title="Bài trước"
+            >
+                ⏮
+            </button>
+
+            <button
+                id="playPauseButton"
+                class="player-btn play-btn"
+                onclick="togglePlay()"
+                title="Phát / tạm dừng"
+            >
+                ▶
+            </button>
+
+            <button
+                class="player-btn"
+                onclick="nextSong()"
+                title="Bài tiếp"
+            >
+                ⏭
+            </button>
+
+            <button
+                class="player-btn"
+                onclick="togglePlayMode()"
+                title="Đổi chế độ phát"
+            >
+                🔀
+            </button>
+
+            <span
+                id="modeText"
+                class="mode-text"
+            >
+                Thứ tự
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="progress-wrap">
+
+        <input
+            id="progress"
+            class="progress"
+            type="range"
+            min="0"
+            max="100"
+            value="0"
+        >
+
+    </div>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     DETAILS MODAL
+===================================================== -->
+
+<div
+    id="detailsModal"
+    class="modal hidden"
+>
+
+    <div class="modal-card">
+
+        <div class="modal-top">
+
+            <button
+                class="close-btn"
+                onclick="closeDetails()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <img
+            id="detailCover"
+            class="detail-cover"
+            alt=""
+        >
+
+
+        <div
+            id="detailTitle"
+            class="detail-title"
+        ></div>
+
+
+        <div
+            id="detailArtist"
+            class="detail-artist"
+        ></div>
+
+
+        <div class="lyrics-title">
+            📃 Lời bài hát
+        </div>
+
+        <div
+            id="detailLyrics"
+            class="lyrics"
+        ></div>
+
+    </div>
+
+</div>
+
+
+<div
+    id="toast"
+    class="toast hidden"
+></div>
+
+
+<audio
+    id="audio"
+    preload="auto"
+></audio>
+
+
+<script>
+
+/* =====================================================
+   NHACBOX - KHÔNG FIREBASE
+   TẤT CẢ DỮ LIỆU LƯU TRÊN THIẾT BỊ
+===================================================== */
+
+const DB_NAME = "NhacBoxDatabase";
+const DB_VERSION = 1;
+
+let db = null;
+
+let currentUser = null;
+
+let songs = [];
+let offlineSongs = [];
+let playlists = [];
+
+let selectedFiles = [];
+
+let currentQueue = [];
+let currentIndex = -1;
+
+let playMode = "order";
+
+let currentObjectURL = null;
+
+
+/* =====================================================
+   DATABASE
+===================================================== */
+
+function openDatabase(){
+
+    return new Promise((resolve,reject)=>{
+
+        const request =
+            indexedDB.open(
+                DB_NAME,
+                DB_VERSION
+            );
+
+
+        request.onupgradeneeded = function(event){
+
+            const database =
+                event.target.result;
+
+
+            if(!database.objectStoreNames.contains("users")){
+
+                database.createObjectStore(
+                    "users",
+                    {keyPath:"email"}
+                );
+
+            }
+
+
+            if(!database.objectStoreNames.contains("songs")){
+
+                database.createObjectStore(
+                    "songs",
+                    {keyPath:"id"}
+                );
+
+            }
+
+
+            if(!database.objectStoreNames.contains("offline")){
+
+                database.createObjectStore(
+                    "offline",
+                    {keyPath:"id"}
+                );
+
+            }
+
+
+            if(!database.objectStoreNames.contains("playlists")){
+
+                database.createObjectStore(
+                    "playlists",
+                    {keyPath:"id"}
+                );
+
+            }
+
+        };
+
+
+        request.onsuccess = function(event){
+
+            db =
+                event.target.result;
+
+            resolve(db);
+
+        };
+
+
+        request.onerror = function(){
+
+            reject(request.error);
+
+        };
+
+    });
+
+}
+
+
+function dbPut(store,data){
+
+    return new Promise((resolve,reject)=>{
+
+        const tx =
+            db.transaction(
+                store,
+                "readwrite"
+            );
+
+        tx.objectStore(store).put(data);
+
+        tx.oncomplete =
+            () => resolve();
+
+        tx.onerror =
+            () => reject(tx.error);
+
+    });
+
+}
+
+
+function dbGet(store,key){
+
+    return new Promise((resolve,reject)=>{
+
+        const tx =
+            db.transaction(
+                store,
+                "readonly"
+            );
+
+        const request =
+            tx.objectStore(store).get(key);
+
+        request.onsuccess =
+            () => resolve(request.result);
+
+        request.onerror =
+            () => reject(request.error);
+
+    });
+
+}
+
+
+function dbGetAll(store){
+
+    return new Promise((resolve,reject)=>{
+
+        const tx =
+            db.transaction(
+                store,
+                "readonly"
+            );
+
+        const request =
+            tx.objectStore(store).getAll();
+
+        request.onsuccess =
+            () => resolve(request.result);
+
+        request.onerror =
+            () => reject(request.error);
+
+    });
+
+}
+
+
+function dbDelete(store,key){
+
+    return new Promise((resolve,reject)=>{
+
+        const tx =
+            db.transaction(
+                store,
+                "readwrite"
+            );
+
+        tx.objectStore(store).delete(key);
+
+        tx.oncomplete =
+            () => resolve();
+
+        tx.onerror =
+            () => reject(tx.error);
+
+    });
+
+}
+
+
+/* =====================================================
+   LOCAL ACCOUNT
+===================================================== */
+
+/*
+   Đây là tài khoản LOCAL.
+   Không gửi email/mật khẩu lên mạng.
+*/
+
+async function register(){
+
+    const email =
+        document
+        .getElementById("registerEmail")
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    const password =
+        document
+        .getElementById("registerPassword")
+        .value;
+
+
+    const password2 =
+        document
+        .getElementById("registerPassword2")
+        .value;
+
+
+    if(!email || !password || !password2){
+
+        showToast(
+            "Vui lòng nhập đầy đủ thông tin."
+        );
+
+        return;
+
+    }
+
+
+    if(password.length < 6){
+
+        showToast(
+            "Mật khẩu cần ít nhất 6 ký tự."
+        );
+
+        return;
+
+    }
+
+
+    if(password !== password2){
+
+        showToast(
+            "Hai mật khẩu không giống nhau."
+        );
+
+        return;
+
+    }
+
+
+    const oldUser =
+        await dbGet(
+            "users",
+            email
+        );
+
+
+    if(oldUser){
+
+        showToast(
+            "Email này đã có tài khoản."
+        );
+
+        return;
+
+    }
+
+
+    const user = {
+
+        email:email,
+
+        password:password,
+
+        createdAt:Date.now()
+
+    };
+
+
+    await dbPut(
+        "users",
+        user
+    );
+
+
+    showToast(
+        "Tạo tài khoản thành công!"
+    );
+
+
+    document
+        .getElementById("registerEmail")
+        .value = "";
+
+    document
+        .getElementById("registerPassword")
+        .value = "";
+
+    document
+        .getElementById("registerPassword2")
+        .value = "";
+
+
+    showLogin();
+
+}
+
+
+async function login(){
+
+    const email =
+        document
+        .getElementById("loginEmail")
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    const password =
+        document
+        .getElementById("loginPassword")
+        .value;
+
+
+    if(!email || !password){
+
+        showToast(
+            "Nhập email và mật khẩu."
+        );
+
+        return;
+
+    }
+
+
+    const user =
+        await dbGet(
+            "users",
+            email
+        );
+
+
+    if(!user){
+
+        showToast(
+            "Không tìm thấy tài khoản."
+        );
+
+        return;
+
+    }
+
+
+    if(user.password !== password){
+
+        showToast(
+            "Sai mật khẩu."
+        );
+
+        return;
+
+    }
+
+
+    currentUser = user;
+
+
+    localStorage.setItem(
+        "NhacBoxCurrentUser",
+        user.email
+    );
+
+
+    enterApp();
+
+}
+
+
+function logout(){
+
+    currentUser = null;
+
+    localStorage.removeItem(
+        "NhacBoxCurrentUser"
+    );
+
+
+    document
+        .getElementById("appPage")
+        .classList.add("hidden");
+
+    document
+        .getElementById("authPage")
+        .classList.remove("hidden");
+
+}
+
+
+/* =====================================================
+   AUTH UI
+===================================================== */
+
+function showRegister(){
+
+    document
+        .getElementById("loginBox")
+        .classList.add("hidden");
+
+    document
+        .getElementById("registerBox")
+        .classList.remove("hidden");
+
+}
+
+
+function showLogin(){
+
+    document
+        .getElementById("registerBox")
+        .classList.add("hidden");
+
+    document
+        .getElementById("loginBox")
+        .classList.remove("hidden");
+
+}
+
+
+/* =====================================================
+   ENTER APP
+===================================================== */
+
+async function enterApp(){
+
+    document
+        .getElementById("authPage")
+        .classList.add("hidden");
+
+    document
+        .getElementById("appPage")
+        .classList.remove("hidden");
+
+
+    document
+        .getElementById("userEmail")
+        .textContent =
+        currentUser.email;
+
+
+    await loadAllData();
+
+    renderLibrary();
+
+    renderOffline();
+
+    renderPlaylists();
+
+}
+
+
+/* =====================================================
+   USER-SPECIFIC DATA
+===================================================== */
+
+function belongsToUser(item){
+
+    return (
+        item.owner ===
+        currentUser.email
+    );
+
+}
+
+
+async function loadAllData(){
+
+    const allSongs =
+        await dbGetAll("songs");
+
+    const allOffline =
+        await dbGetAll("offline");
+
+    const allPlaylists =
+        await dbGetAll("playlists");
+
+
+    songs =
+        allSongs.filter(
+            belongsToUser
+        );
+
+
+    offlineSongs =
+        allOffline.filter(
+            belongsToUser
+        );
+
+
+    playlists =
+        allPlaylists.filter(
+            belongsToUser
+        );
+
+
+    songs.sort(
+        (a,b) =>
+        b.createdAt - a.createdAt
+    );
+
+}
+
+
+/* =====================================================
+   FILE SELECTION
+===================================================== */
+
+document
+    .getElementById("musicInput")
+    .addEventListener(
+        "change",
+        function(){
+
+            selectedFiles =
+                Array.from(this.files);
+
+
+            const box =
+                document
+                .getElementById(
+                    "selectedFiles"
+                );
+
+
+            if(!selectedFiles.length){
+
+                box.textContent =
+                    "Chưa chọn bài hát.";
+
+                return;
+
+            }
+
+
+            let html =
+                "<strong>Đã chọn " +
+                selectedFiles.length +
+                " bài:</strong><br>";
+
+
+            selectedFiles
+                .slice(0,12)
+                .forEach(file => {
+
+                    html +=
+                        "🎵 " +
+                        escapeHTML(file.name) +
+                        "<br>";
+
+                });
+
+
+            if(selectedFiles.length > 12){
+
+                html +=
+                    "... và " +
+                    (selectedFiles.length - 12) +
+                    " bài khác";
+
+            }
+
+
+            box.innerHTML =
+                html;
+
+        }
+    );
+
+
+/* =====================================================
+   ADD SONGS
+===================================================== */
+
+async function addSelectedSongs(){
+
+    if(!currentUser){
+
+        showToast("Bạn chưa đăng nhập.");
+
+        return;
+
+    }
+
+
+    if(!selectedFiles.length){
+
+        showToast(
+            "Bạn chưa chọn bài hát."
+        );
+
+        return;
+
+    }
+
+
+    const artist =
+        document
+        .getElementById("artistInput")
+        .value
+        .trim()
+        ||
+        "Không rõ nghệ sĩ";
+
+
+    const playlistName =
+        document
+        .getElementById("playlistInput")
+        .value
+        .trim();
+
+
+    const lyrics =
+        document
+        .getElementById("lyricsInput")
+        .value
+        .trim()
+        ||
+        "Chưa có lời bài hát.";
+
+
+    const coverFile =
+        document
+        .getElementById("coverInput")
+        .files[0];
+
+
+    let coverData = "";
+
+
+    if(coverFile){
+
+        coverData =
+            await fileToDataURL(
+                coverFile
+            );
+
+    }
+
+
+    let added = 0;
+
+
+    for(const file of selectedFiles){
+
+        const id =
+            currentUser.email +
+            "_" +
+            Date.now() +
+            "_" +
+            Math.random()
+                .toString(36)
+                .substring(2);
+
+
+        const song = {
+
+            id:id,
+
+            owner:
+                currentUser.email,
+
+            title:
+                removeExtension(
+                    file.name
+                ),
+
+            artist:
+                artist,
+
+            lyrics:
+                lyrics,
+
+            cover:
+                coverData,
+
+            playlist:
+                playlistName ||
+                "Thư viện",
+
+            blob:
+                file,
+
+            createdAt:
+                Date.now() + added
+
+        };
+
+
+        await dbPut(
+            "songs",
+            song
+        );
+
+
+        added++;
+
+    }
+
+
+    await loadAllData();
+
+    renderLibrary();
+
+    renderPlaylists();
+
+
+    selectedFiles = [];
+
+
+    document
+        .getElementById("musicInput")
+        .value = "";
+
+
+    document
+        .getElementById("coverInput")
+        .value = "";
+
+
+    document
+        .getElementById("selectedFiles")
+        .textContent =
+        "Đã thêm " +
+        added +
+        " bài hát.";
+
+
+    showToast(
+        "Đã thêm " +
+        added +
+        " bài hát!"
+    );
+
+
+    openTab("library");
+
+}
+
+
+/* =====================================================
+   FILE HELPERS
+===================================================== */
+
+function removeExtension(name){
+
+    return name.replace(
+        /\.[^/.]+$/,
+        ""
+    );
+
+}
+
+
+function fileToDataURL(file){
+
+    return new Promise(
+        (resolve,reject)=>{
+
+            const reader =
+                new FileReader();
+
+            reader.onload =
+                () => resolve(
+                    reader.result
+                );
+
+            reader.onerror =
+                reject;
+
+            reader.readAsDataURL(file);
+
+        }
+    );
+
+}
+
+
+function escapeHTML(value){
+
+    return String(value)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* =====================================================
+   LIBRARY
+===================================================== */
+
+function renderLibrary(){
+
+    const list =
+        document
+        .getElementById(
+            "libraryList"
+        );
+
+
+    const keyword =
+        document
+        .getElementById(
+            "searchInput"
+        )
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    let filtered =
+        songs.filter(song => {
+
+            return (
+                song.title
+                    .toLowerCase()
+                    .includes(keyword)
+                ||
+                song.artist
+                    .toLowerCase()
+                    .includes(keyword)
+            );
+
+        });
+
+
+    list.innerHTML = "";
+
+
+    if(!filtered.length){
+
+        list.innerHTML =
+            `<div class="empty">
+                🎵 Chưa có bài hát.<br><br>
+                Vào "➕ Thêm nhạc" để thêm nhạc.
+            </div>`;
+
+        return;
+
+    }
+
+
+    filtered.forEach(song => {
+
+        list.appendChild(
+            createSongElement(
+                song,
+                false
+            )
+        );
+
+    });
+
+}
+
+
+function createSongElement(song,isOffline){
+
+    const item =
+        document.createElement("div");
+
+    item.className =
+        "song";
+
+
+    const cover =
+        document.createElement("img");
+
+    cover.className =
+        "cover";
+
+    cover.src =
+        song.cover ||
+        createDefaultCover();
+
+
+    const info =
+        document.createElement("div");
+
+    info.className =
+        "song-info";
+
+    info.onclick =
+        () => {
+
+            playSong(
+                song,
+                isOffline
+            );
+
+        };
+
+
+    info.innerHTML = `
+
+        <div class="song-title">
+            ${escapeHTML(song.title)}
+        </div>
+
+        <div class="song-artist">
+            ${escapeHTML(song.artist)}
+        </div>
+
+    `;
+
+
+    const buttons =
+        document.createElement("div");
+
+    buttons.className =
+        "song-buttons";
+
+
+    if(!isOffline){
+
+        const details =
+            document.createElement("button");
+
+        details.className =
+            "small-btn details-btn";
+
+        details.textContent =
+            "ℹ";
+
+        details.title =
+            "Chi tiết / lời bài hát";
+
+        details.onclick =
+            () => showDetails(song);
+
+        buttons.appendChild(
+            details
+        );
+
+
+        const download =
+            document.createElement("button");
+
+        download.className =
+            "small-btn";
+
+        download.textContent =
+            "📥";
+
+        download.title =
+            "Tải offline";
+
+        download.onclick =
+            () =>
+            downloadOffline(song);
+
+        buttons.appendChild(
+            download
+        );
+
+
+        const remove =
+            document.createElement("button");
+
+        remove.className =
+            "small-btn";
+
+        remove.textContent =
+            "🗑";
+
+        remove.title =
+            "Xóa";
+
+        remove.onclick =
+            () =>
+            deleteSong(song);
+
+        buttons.appendChild(
+            remove
+        );
+
+    }else{
+
+        const remove =
+            document.createElement("button");
+
+        remove.className =
+            "small-btn";
+
+        remove.textContent =
+            "🗑";
+
+        remove.title =
+            "Xóa khỏi offline";
+
+        remove.onclick =
+            () =>
+            deleteOffline(song);
+
+        buttons.appendChild(
+            remove
+        );
+
+    }
+
+
+    item.appendChild(cover);
+    item.appendChild(info);
+    item.appendChild(buttons);
+
+
+    return item;
+
+}
+
+
+/* =====================================================
+   PLAY MUSIC
+===================================================== */
+
+function playSong(song,isOffline=false){
+
+    if(!song)
+        return;
+
+
+    currentQueue =
+        isOffline
+        ? offlineSongs.slice()
+        : songs.slice();
+
+
+    currentIndex =
+        currentQueue.findIndex(
+            item =>
+            item.id === song.id
+        );
+
+
+    if(currentIndex < 0)
+        currentIndex = 0;
+
+
+    if(currentObjectURL){
+
+        URL.revokeObjectURL(
+            currentObjectURL
+        );
+
+    }
+
+
+    currentObjectURL =
+        URL.createObjectURL(
+            song.blob
+        );
+
+
+    audio.src =
+        currentObjectURL;
+
+
+    audio.play()
+        .catch(()=>{});
+
+
+    document
+        .getElementById(
+            "playerTitle"
+        )
+        .textContent =
+        song.title;
+
+
+    document
+        .getElementById(
+            "playerArtist"
+        )
+        .textContent =
+        song.artist;
+
+
+    document
+        .getElementById(
+            "playerCover"
+        )
+        .src =
+        song.cover ||
+        createDefaultCover();
+
+
+    setupMediaSession(
+        song
+    );
+
+}
+
+
+/* =====================================================
+   AUDIO CONTROLS
+===================================================== */
+
+const audio =
+    document.getElementById(
+        "audio"
+    );
+
+
+function togglePlay(){
+
+    if(!audio.src){
+
+        if(!songs.length){
+
+            showToast(
+                "Thư viện chưa có nhạc."
+            );
+
+            return;
+
+        }
+
+
+        currentQueue =
+            songs.slice();
+
+        currentIndex = 0;
+
+        playSong(
+            currentQueue[0]
+        );
+
+        return;
+
+    }
+
+
+    if(audio.paused){
+
+        audio.play()
+            .catch(()=>{});
+
+    }else{
+
+        audio.pause();
+
+    }
+
+}
+
+
+function nextSong(){
+
+    if(!currentQueue.length)
+        return;
+
+
+    if(playMode === "random"){
+
+        if(currentQueue.length === 1){
+
+            currentIndex = 0;
+
+        }else{
+
+            let next;
+
+            do{
+
+                next =
+                    Math.floor(
+                        Math.random() *
+                        currentQueue.length
+                    );
+
+            }while(
+                next === currentIndex
+            );
+
+
+            currentIndex =
+                next;
+
+        }
+
+    }else{
+
+        currentIndex++;
+
+
+        if(
+            currentIndex >=
+            currentQueue.length
+        ){
+
+            currentIndex = 0;
+
+        }
+
+    }
+
+
+    playSong(
+        currentQueue[currentIndex]
+    );
+
+}
+
+
+function previousSong(){
+
+    if(!currentQueue.length)
+        return;
+
+
+    currentIndex--;
+
+
+    if(currentIndex < 0){
+
+        currentIndex =
+            currentQueue.length - 1;
+
+    }
+
+
+    playSong(
+        currentQueue[currentIndex]
+    );
+
+}
+
+
+function togglePlayMode(){
+
+    if(playMode === "order"){
+
+        playMode =
+            "random";
+
+        document
+            .getElementById(
+                "modeText"
+            )
+            .textContent =
+            "Ngẫu nhiên";
+
+        showToast(
+            "Đã bật phát ngẫu nhiên."
+        );
+
+    }else{
+
+        playMode =
+            "order";
+
+        document
+            .getElementById(
+                "modeText"
+            )
+            .textContent =
+            "Thứ tự";
+
+        showToast(
+            "Đã bật phát theo thứ tự."
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   AUDIO EVENTS
+===================================================== */
+
+audio.addEventListener(
+    "play",
+    () => {
+
+        document
+            .getElementById(
+                "playPauseButton"
+            )
+            .textContent =
+            "⏸";
+
+    }
+);
+
+
+audio.addEventListener(
+    "pause",
+    () => {
+
+        document
+            .getElementById(
+                "playPauseButton"
+            )
+            .textContent =
+            "▶";
+
+    }
+);
+
+
+audio.addEventListener(
+    "ended",
+    () => {
+
+        nextSong();
+
+    }
+);
+
+
+audio.addEventListener(
+    "timeupdate",
+    () => {
+
+        if(!audio.duration)
+            return;
+
+
+        document
+            .getElementById(
+                "progress"
+            )
+            .value =
+            (
+                audio.currentTime /
+                audio.duration
+            ) * 100;
+
+    }
+);
+
+
+document
+    .getElementById("progress")
+    .addEventListener(
+        "input",
+        function(){
+
+            if(!audio.duration)
+                return;
+
+
+            audio.currentTime =
+                audio.duration *
+                (
+                    Number(this.value) /
+                    100
+                );
+
+        }
+    );
+
+
+/* =====================================================
+   MEDIA SESSION
+===================================================== */
+
+function setupMediaSession(song){
+
+    if(!("mediaSession" in navigator))
+        return;
+
+
+    try{
+
+        navigator.mediaSession.metadata =
+            new MediaMetadata({
+
+                title:
+                    song.title,
+
+                artist:
+                    song.artist,
+
+                album:
+                    "NhacBox",
+
+                artwork:[
+                    {
+                        src:
+                            song.cover ||
+                            createDefaultCover(),
+
+                        sizes:
+                            "512x512",
+
+                        type:
+                            "image/png"
+                    }
+                ]
+
+            });
+
+
+        navigator.mediaSession.setActionHandler(
+            "play",
+            () => audio.play()
+        );
+
+
+        navigator.mediaSession.setActionHandler(
+            "pause",
+            () => audio.pause()
+        );
+
+
+        navigator.mediaSession.setActionHandler(
+            "nexttrack",
+            nextSong
+        );
+
+
+        navigator.mediaSession.setActionHandler(
+            "previoustrack",
+            previousSong
+        );
+
+    }catch(error){
+
+        console.log(
+            "Media Session không được hỗ trợ.",
+            error
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   OFFLINE
+===================================================== */
+
+async function downloadOffline(song){
+
+    const exists =
+        offlineSongs.some(
+            item =>
+            item.id === song.id
+        );
+
+
+    if(exists){
+
+        showToast(
+            "Bài này đã có trong Offline."
+        );
+
+        return;
+
+    }
+
+
+    const copy = {
+
+        id:song.id,
+
+        owner:
+            currentUser.email,
+
+        title:
+            song.title,
+
+        artist:
+            song.artist,
+
+        lyrics:
+            song.lyrics,
+
+        cover:
+            song.cover,
+
+        playlist:
+            song.playlist,
+
+        blob:
+            song.blob,
+
+        savedAt:
+            Date.now()
+
+    };
+
+
+    await dbPut(
+        "offline",
+        copy
+    );
+
+
+    await loadAllData();
+
+    renderOffline();
+
+
+    showToast(
+        "📥 Đã lưu để nghe offline."
+    );
+
+}
+
+
+function renderOffline(){
+
+    const list =
+        document
+        .getElementById(
+            "offlineList"
+        );
+
+
+    list.innerHTML = "";
+
+
+    if(!offlineSongs.length){
+
+        list.innerHTML =
+            `<div class="empty">
+                📥 Chưa có bài offline.
+                <br><br>
+                Bấm 📥 ở bài hát để lưu.
+            </div>`;
+
+        return;
+
+    }
+
+
+    offlineSongs.forEach(song => {
+
+        list.appendChild(
+            createSongElement(
+                song,
+                true
+            )
+        );
+
+    });
+
+}
+
+
+async function deleteOffline(song){
+
+    if(
+        !confirm(
+            "Xóa bài này khỏi Offline?"
+        )
+    )
+        return;
+
+
+    await dbDelete(
+        "offline",
+        song.id
+    );
+
+
+    await loadAllData();
+
+    renderOffline();
+
+
+    showToast(
+        "Đã xóa khỏi Offline."
+    );
+
+}
+
+
+/* =====================================================
+   DELETE SONG
+===================================================== */
+
+async function deleteSong(song){
+
+    if(
+        !confirm(
+            "Xóa '" +
+            song.title +
+            "' khỏi thư viện?"
+        )
+    )
+        return;
+
+
+    await dbDelete(
+        "songs",
+        song.id
+    );
+
+
+    await dbDelete(
+        "offline",
+        song.id
+    );
+
+
+    await loadAllData();
+
+    renderLibrary();
+
+    renderOffline();
+
+    renderPlaylists();
+
+
+    showToast(
+        "Đã xóa bài hát."
+    );
+
+}
+
+
+/* =====================================================
+   DETAILS / LYRICS
+===================================================== */
+
+function showDetails(song){
+
+    document
+        .getElementById(
+            "detailCover"
+        )
+        .src =
+        song.cover ||
+        createDefaultCover();
+
+
+    document
+        .getElementById(
+            "detailTitle"
+        )
+        .textContent =
+        song.title;
+
+
+    document
+        .getElementById(
+            "detailArtist"
+        )
+        .textContent =
+        song.artist;
+
+
+    document
+        .getElementById(
+            "detailLyrics"
+        )
+        .textContent =
+        song.lyrics ||
+        "Chưa có lời bài hát.";
+
+
+    document
+        .getElementById(
+            "detailsModal"
+        )
+        .classList.remove(
+            "hidden"
+        );
+
+}
+
+
+function closeDetails(){
+
+    document
+        .getElementById(
+            "detailsModal"
+        )
+        .classList.add(
+            "hidden"
+        );
+
+}
+
+
+document
+    .getElementById(
+        "detailsModal"
+    )
+    .addEventListener(
+        "click",
+        function(event){
+
+            if(event.target === this){
+
+                closeDetails();
+
+            }
+
+        }
+    );
+
+
+/* =====================================================
+   PLAYLIST
+===================================================== */
+
+async function createPlaylist(){
+
+    const input =
+        document
+        .getElementById(
+            "newPlaylistName"
+        );
+
+
+    const name =
+        input.value.trim();
+
+
+    if(!name){
+
+        showToast(
+            "Nhập tên playlist."
+        );
+
+        return;
+
+    }
+
+
+    const playlist = {
+
+        id:
+            currentUser.email +
+            "_playlist_" +
+            Date.now() +
+            "_" +
+            Math.random()
+                .toString(36)
+                .substring(2),
+
+        owner:
+            currentUser.email,
+
+        name:name,
+
+        songIds:[],
+
+        createdAt:
+            Date.now()
+
+    };
+
+
+    await dbPut(
+        "playlists",
+        playlist
+    );
+
+
+    input.value = "";
+
+
+    await loadAllData();
+
+    renderPlaylists();
+
+
+    showToast(
+        "Đã tạo playlist."
+    );
+
+}
+
+
+function renderPlaylists(){
+
+    const box =
+        document
+        .getElementById(
+            "playlistList"
+        );
+
+
+    box.innerHTML = "";
+
+
+    if(!playlists.length){
+
+        box.innerHTML =
+            `<div class="empty">
+                📂 Chưa có playlist.
+            </div>`;
+
+        return;
+
+    }
+
+
+    playlists.forEach(playlist => {
+
+        const card =
+            document.createElement(
+                "div"
+            );
+
+        card.className =
+            "playlist-card";
+
+
+        const count =
+            playlist.songIds.length;
+
+
+        card.innerHTML = `
+
+            <div class="playlist-head">
+
+                <div>
+
+                    <div class="playlist-name">
+                        📂 ${escapeHTML(playlist.name)}
+                    </div>
+
+                    <div class="playlist-count">
+                        ${count} bài
+                    </div>
+
+                </div>
+
+                <div class="playlist-actions">
+
+                    <button
+                        class="small-btn"
+                        onclick="addAllSongsToPlaylist('${playlist.id}')"
+                    >
+                        +
+                    </button>
+
+                    <button
+                        class="small-btn"
+                        onclick="playPlaylist('${playlist.id}')"
+                    >
+                        ▶
+                    </button>
+
+                    <button
+                        class="small-btn"
+                        onclick="deletePlaylist('${playlist.id}')"
+                    >
+                        🗑
+                    </button>
+
+                </div>
+
+            </div>
+
+        `;
+
+
+        box.appendChild(card);
+
+    });
+
+}
+
+
+async function addAllSongsToPlaylist(id){
+
+    const playlist =
+        playlists.find(
+            p => p.id === id
+        );
+
+
+    if(!playlist)
+        return;
+
+
+    playlist.songIds =
+        songs.map(
+            song => song.id
+        );
+
+
+    await dbPut(
+        "playlists",
+        playlist
+    );
+
+
+    await loadAllData();
+
+    renderPlaylists();
+
+
+    showToast(
+        "Đã thêm toàn bộ thư viện vào playlist."
+    );
+
+}
+
+
+function playPlaylist(id){
+
+    const playlist =
+        playlists.find(
+            p => p.id === id
+        );
+
+
+    if(!playlist)
+        return;
+
+
+    const queue =
+        playlist.songIds
+            .map(songId =>
+                songs.find(
+                    song =>
+                    song.id === songId
+                )
+            )
+            .filter(Boolean);
+
+
+    if(!queue.length){
+
+        showToast(
+            "Playlist chưa có bài hát."
+        );
+
+        return;
+
+    }
+
+
+    currentQueue =
+        queue;
+
+    currentIndex = 0;
+
+
+    playSong(
+        currentQueue[0]
+    );
+
+}
+
+
+async function deletePlaylist(id){
+
+    if(
+        !confirm(
+            "Xóa playlist này?"
+        )
+    )
+        return;
+
+
+    await dbDelete(
+        "playlists",
+        id
+    );
+
+
+    await loadAllData();
+
+    renderPlaylists();
+
+
+    showToast(
+        "Đã xóa playlist."
+    );
+
+}
+
+
+/* =====================================================
+   TABS
+===================================================== */
+
+function openTab(tab){
+
+    const sections = {
+
+        library:
+            document.getElementById(
+                "librarySection"
+            ),
+
+        add:
+            document.getElementById(
+                "addSection"
+            ),
+
+        playlist:
+            document.getElementById(
+                "playlistSection"
+            ),
+
+        offline:
+            document.getElementById(
+                "offlineSection"
+            )
+
+    };
+
+
+    Object.values(sections)
+        .forEach(section =>
+            section.classList.add(
+                "hidden"
+            )
+        );
+
+
+    sections[tab]
+        .classList.remove(
+            "hidden"
+        );
+
+
+    document
+        .querySelectorAll(
+            ".tabs button"
+        )
+        .forEach(
+            button =>
+            button.classList.remove(
+                "active"
+            )
+        );
+
+
+    const button =
+        document.getElementById(
+            "tab" +
+            tab.charAt(0).toUpperCase() +
+            tab.slice(1)
+        );
+
+
+    if(button){
+
+        button.classList.add(
+            "active"
+        );
+
+    }
+
+
+    if(tab === "library"){
+
+        renderLibrary();
+
+    }
+
+
+    if(tab === "offline"){
+
+        renderOffline();
+
+    }
+
+
+    if(tab === "playlist"){
+
+        renderPlaylists();
+
+    }
+
+}
+
+
+/* =====================================================
+   DEFAULT COVER
+===================================================== */
+
+function createDefaultCover(){
+
+    return (
+        "data:image/svg+xml;charset=UTF-8," +
+        encodeURIComponent(`
+
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="512"
+                height="512"
+            >
+
+                <rect
+                    width="100%"
+                    height="100%"
+                    fill="#29292e"
+                />
+
+                <text
+                    x="50%"
+                    y="53%"
+                    text-anchor="middle"
+                    font-size="150"
+                >
+                    🎵
+                </text>
+
+            </svg>
+
+        `)
+    );
+
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+let toastTimer = null;
+
+
+function showToast(message){
+
+    const toast =
+        document
+        .getElementById(
+            "toast"
+        );
+
+
+    toast.textContent =
+        message;
+
+
+    toast.classList.remove(
+        "hidden"
+    );
+
+
+    clearTimeout(
+        toastTimer
+    );
+
+
+    toastTimer =
+        setTimeout(
+            () => {
+
+                toast.classList.add(
+                    "hidden"
+                );
+
+            },
+            2300
+        );
+
+}
+
+
+/* =====================================================
+   START
+===================================================== */
+
+(async function(){
+
+    await openDatabase();
+
+
+    const savedEmail =
+        localStorage.getItem(
+            "NhacBoxCurrentUser"
+        );
+
+
+    if(savedEmail){
+
+        const user =
+            await dbGet(
+                "users",
+                savedEmail
+            );
+
+
+        if(user){
+
+            currentUser =
+                user;
+
+            enterApp();
+
+            return;
+
+        }
+
+    }
+
+
+    document
+        .getElementById(
+            "authPage"
+        )
+        .classList.remove(
+            "hidden"
+        );
+
+})();
+
+</script>
+
+</body>
+</html>
